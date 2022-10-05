@@ -1,9 +1,9 @@
 package com.capstone.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table
@@ -18,31 +18,30 @@ public class Orders {
     @Column
     int orderNumber;
     @Column
-    int productID;
-    @Column
     int productCount;
     @Column
     float totalCost;
     @Column
     String status;
-
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "order_product",
             joinColumns = {
-                    @JoinColumn(name = "orderD", referencedColumnName = "ID",
+                    @JoinColumn(name = "orderID", referencedColumnName = "ID",
                             nullable = false, updatable = false)},
             inverseJoinColumns = {
                     @JoinColumn(name = "productID", referencedColumnName = "ID",
                             nullable = false, updatable = false)})
-    private Set<Product> products = new HashSet<>();
+    private List<Product> products = new ArrayList<>();
     public Orders() {
+        productCount = 0;
+        totalCost = 0;
     }
 
-    public Orders(int id, int userID, int orderNumber, int productID, int productCount, float totalCost, String status) {
+    public Orders(int id, int userID, int orderNumber, int productCount, float totalCost, String status) {
         this.id = id;
         this.userID = userID;
         this.orderNumber = orderNumber;
-        this.productID = productID;
         this.productCount = productCount;
         this.totalCost = totalCost;
         this.status = status;
@@ -70,14 +69,6 @@ public class Orders {
         this.orderNumber = orderNumber;
     }
 
-    public int getProductID() {
-        return productID;
-    }
-
-    public void setProductID(int productID) {
-        this.productID = productID;
-    }
-
     public int getProductCount() {
         return productCount;
     }
@@ -102,6 +93,11 @@ public class Orders {
         this.status = status;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
 
-
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 }

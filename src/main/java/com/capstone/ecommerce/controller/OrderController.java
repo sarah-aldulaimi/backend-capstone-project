@@ -1,6 +1,7 @@
 package com.capstone.ecommerce.controller;
 
 import com.capstone.ecommerce.model.Orders;
+import com.capstone.ecommerce.model.Product;
 import com.capstone.ecommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +37,10 @@ public class OrderController {
     @PutMapping("/{orderID}")
     private void updateOrder(@PathVariable("orderID") int orderID, @RequestBody Orders orders){
         orderService.updateOrder(orderID, orders);
+    }
+
+    @PostMapping("{orderID}/products")
+    private void addProductToOrder(@PathVariable("orderID") int orderID, @RequestBody Product product){
+        orderService.addProductToOrder(product.getId(), orderID);
     }
 }

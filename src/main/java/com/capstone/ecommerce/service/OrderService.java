@@ -1,7 +1,9 @@
 package com.capstone.ecommerce.service;
 
 import com.capstone.ecommerce.model.Orders;
+import com.capstone.ecommerce.model.Product;
 import com.capstone.ecommerce.repository.OrderRepository;
+import com.capstone.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class OrderService {
 
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     public List<Orders> getAllOrders(){
         return orderRepository.findAll();
@@ -41,5 +45,15 @@ public class OrderService {
     public int gen() {
         Random r = new Random( System.currentTimeMillis() );
         return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+    }
+
+    public void addProductToOrder(int productID, int orderID){
+        Orders order = orderRepository.getOrderById(orderID);
+        order.setProductCount(order.getProductCount()+1);
+        Product product = productRepository.getProductById(productID);
+        float totalPrice = order.getTotalCost() + product.getPrice();
+        order.setTotalCost(totalPrice);
+        order.getProducts().add(product);
+        orderRepository.save(order);
     }
 }

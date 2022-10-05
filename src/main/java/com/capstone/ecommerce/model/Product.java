@@ -1,5 +1,7 @@
 package com.capstone.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +22,7 @@ public class Product {
 
     @Column
     int categoryID;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private Set<Orders> orders = new HashSet<>();
 
@@ -73,5 +75,13 @@ public class Product {
 
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
+    }
+
+    public Set<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
     }
 }
