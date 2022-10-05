@@ -1,8 +1,11 @@
 package com.capstone.ecommerce.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table
+@Table(name ="users")
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +26,19 @@ public class Users {
     @Column
     int locationId;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "user_role",
+            joinColumns = {
+                    @JoinColumn(name = "userID", referencedColumnName = "ID",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "roleID", referencedColumnName = "ID",
+                            nullable = false, updatable = false)})
+    private Set<Role> roles = new HashSet<>();
+
     public Users(){
     }
+
     public Users(int id, String firstName, String lastName, int age, String email, String mobile, String password, int locId) {
         this.id = id;
         this.firstName = firstName;

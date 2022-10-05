@@ -1,9 +1,11 @@
 package com.capstone.ecommerce.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +16,8 @@ public class Role {
     @Column
     String description;
 
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private Set<Users> users = new HashSet<>();
     public Role(){}
 
     public Role(int id, String name, String description) {

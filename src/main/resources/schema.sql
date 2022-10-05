@@ -30,7 +30,7 @@ create table users(
 --drop table user_role;
 create table user_role(
     userID int,
-    RoleID int,
+    roleID int,
     CONSTRAINT PK_user_role PRIMARY KEY (UserID, RoleID),
     CONSTRAINT FK_user_role_User FOREIGN KEY (UserID) REFERENCES users(ID),
     CONSTRAINT FK_user_role_Role FOREIGN KEY (RoleID) REFERENCES ROLE(ID)
@@ -60,11 +60,17 @@ create table orders(
     ID INT AUTO_INCREMENT,
     UserID INT NOT NULL,
     OrderNumber INT NOT NULL,
-    ProductID INT NOT NULL,
     ProductCount INT NOT NULL,
     TotalCost DECIMAL(13,2) NOT NULL,
     Status VARCHAR(10) NOT NULL,
     CONSTRAINT PK_order PRIMARY KEY (id),
-    CONSTRAINT FK_order_product FOREIGN KEY (ProductID) REFERENCES product(ID),
     CONSTRAINT fk_order_user FOREIGN KEY (UserID) REFERENCES users(ID)
+);
+
+create table order_product(
+    productID INT NOT NULL,
+    orderID INT NOT NULL,
+    constraint pk_order_products primary key (productID, orderID),
+    constraint fk_orderID_order foreign key (orderID) references orders(ID),
+    constraint fk_productID_product foreign key (productID) references product(id)
 );

@@ -1,7 +1,9 @@
 package com.capstone.ecommerce.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 @Entity
 @Table
@@ -24,6 +26,15 @@ public class Orders {
     @Column
     String status;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "order_product",
+            joinColumns = {
+                    @JoinColumn(name = "orderD", referencedColumnName = "ID",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "productID", referencedColumnName = "ID",
+                            nullable = false, updatable = false)})
+    private Set<Product> products = new HashSet<>();
     public Orders() {
     }
 

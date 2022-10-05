@@ -1,6 +1,8 @@
 package com.capstone.ecommerce.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -18,6 +20,9 @@ public class Product {
 
     @Column
     int categoryID;
+
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    private Set<Orders> orders = new HashSet<>();
 
     public Product(){
     }
