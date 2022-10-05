@@ -1,5 +1,7 @@
 package com.capstone.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class Role {
     @Column
     String description;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<Users> users = new HashSet<>();
     public Role(){}
@@ -50,8 +53,11 @@ public class Role {
         this.description = description;
     }
 
+    public Set<Users> getUsers() {
+        return users;
+    }
 
-
-
-
+    public void setUsers(Set<Users> users) {
+        this.users = users;
+    }
 }

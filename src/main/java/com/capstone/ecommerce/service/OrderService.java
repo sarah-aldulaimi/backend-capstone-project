@@ -56,4 +56,14 @@ public class OrderService {
         order.getProducts().add(product);
         orderRepository.save(order);
     }
+
+    public void deleteProductFromOrder(int orderID, int productID){
+        Orders order = orderRepository.getOrderById(orderID);
+        Product product = productRepository.getProductById(productID);
+        order.setProductCount(order.getProductCount()-1);
+        float totalPrice = order.getTotalCost() - product.getPrice();
+        order.setTotalCost(totalPrice);
+        order.getProducts().remove(product);
+        orderRepository.save(order);
+    }
 }
