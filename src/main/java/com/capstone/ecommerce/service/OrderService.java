@@ -66,4 +66,9 @@ public class OrderService {
         order.getProducts().remove(product);
         orderRepository.save(order);
     }
+
+    public List<Product> viewProductsOfOrder(int orderID){
+        Orders order = orderRepository.getOrderById(orderID);
+        return order.getProducts();
+    }
 }
