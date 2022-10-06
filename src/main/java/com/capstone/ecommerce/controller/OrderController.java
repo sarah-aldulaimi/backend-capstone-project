@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200" )
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -27,6 +28,7 @@ public class OrderController {
     @DeleteMapping("/{orderID}")
     private void deleteOrder(@PathVariable("orderID") int orderID) {
         orderService.deleteOrderById(orderID);
+
     }
 
     @PostMapping
@@ -45,7 +47,7 @@ public class OrderController {
     }
 
     @DeleteMapping("{orderID}/products/{productID}")
-    private void addProductToOrder(@PathVariable("orderID") int orderID, @PathVariable("productID") int productID){
+    private void deleteProductToOrder(@PathVariable("orderID") int orderID, @PathVariable("productID") int productID){
         orderService.deleteProductFromOrder(orderID, productID);
     }
 
