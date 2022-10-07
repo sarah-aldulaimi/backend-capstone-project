@@ -36,10 +36,11 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
-    public void addOrder(Orders orders){
+    public Orders addOrder(Orders orders){
         int orderNumber = gen();
         orders.setOrderNumber(orderNumber);
         orderRepository.save(orders);
+        return orders;
     }
 
     public int gen() {
@@ -47,7 +48,7 @@ public class OrderService {
         return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
     }
 
-    public void addProductToOrder(int productID, int orderID){
+    public Orders addProductToOrder(int productID, int orderID){
         Orders order = orderRepository.getOrderById(orderID);
         order.setProductCount(order.getProductCount()+1);
         Product product = productRepository.getProductById(productID);
@@ -55,6 +56,7 @@ public class OrderService {
         order.setTotalCost(totalPrice);
         order.getProducts().add(product);
         orderRepository.save(order);
+        return order;
     }
 
     public void deleteProductFromOrder(int orderID, int productID){

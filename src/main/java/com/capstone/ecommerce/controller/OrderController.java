@@ -3,6 +3,7 @@ package com.capstone.ecommerce.controller;
 import com.capstone.ecommerce.model.Orders;
 import com.capstone.ecommerce.model.Product;
 import com.capstone.ecommerce.service.OrderService;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,8 @@ public class OrderController {
     }
 
     @PostMapping
-    private void saveOrder(@RequestBody Orders orders) {
-        orderService.addOrder(orders);
+    private Orders saveOrder(@RequestBody Orders orders) {
+        return orderService.addOrder(orders);
     }
 
     @PutMapping("/{orderID}")
@@ -42,8 +43,8 @@ public class OrderController {
     }
 
     @PostMapping("{orderID}/products")
-    private void addProductToOrder(@PathVariable("orderID") int orderID, @RequestBody Product product){
-        orderService.addProductToOrder(product.getId(), orderID);
+    private Orders addProductToOrder(@PathVariable("orderID") int orderID, @RequestBody Product product){
+        return orderService.addProductToOrder(product.getId(), orderID);
     }
 
     @DeleteMapping("{orderID}/products/{productID}")
