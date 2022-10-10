@@ -1,11 +1,13 @@
 package com.capstone.ecommerce.controller;
 
+import com.capstone.ecommerce.model.Role;
 import com.capstone.ecommerce.model.Users;
 import com.capstone.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping
@@ -41,5 +43,14 @@ public class UserController {
     @PostMapping("/login")
     public Users login(@RequestBody Users users){
         return userService.isLoginSuccessful(users);
+    }
+
+    @GetMapping("users/{userID}/roles")
+    public Set<Role> checkUserRole(@PathVariable("userID") int userID){
+        return userService.checkUserRole(userID);
+    }
+    @PostMapping("users/{userID}/roles")
+    public void assignUserRole(@PathVariable("userID") int userID, @RequestBody Role role){
+        userService.assignUserRole(userID,role.getId());
     }
 }

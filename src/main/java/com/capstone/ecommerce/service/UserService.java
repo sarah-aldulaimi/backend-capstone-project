@@ -1,19 +1,22 @@
 package com.capstone.ecommerce.service;
 
+import com.capstone.ecommerce.model.Role;
 import com.capstone.ecommerce.model.Users;
+import com.capstone.ecommerce.repository.RoleRepository;
 import com.capstone.ecommerce.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService {
 
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    RoleRepository roleRepository;
     public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
@@ -47,5 +50,19 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    public Set<Role> checkUserRole(int userID){
+        Users temp = userRepository.getUserById(userID);
+        return temp.getRoles();
+    }
+
+    public Users assignUserRole(int userID, int roleID){
+        Users tempUser = userRepository.getUserById(userID);
+        Role tempRole = roleRepository.getRoleById(roleID);
+       // Role userRole = new U()
+        tempUser.getRoles().add(tempRole);
+        userRepository.save(tempUser);
+        return tempUser;
     }
 }
