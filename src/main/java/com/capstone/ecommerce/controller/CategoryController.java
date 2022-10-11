@@ -34,7 +34,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{categoryID}")
-    private void updateOrder(@PathVariable("categoryID") int categoryID, @RequestBody Category category){
+    private void updateCategory(@PathVariable("categoryID") int categoryID, @RequestBody Category category){
         categoryService.updateCategory(categoryID, category);
     }
 

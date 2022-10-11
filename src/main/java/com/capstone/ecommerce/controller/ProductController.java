@@ -39,4 +39,9 @@ public class ProductController {
         productService.updateProduct(productID, product);
     }
 
+    @GetMapping("categories/{categoryID}")
+    private List<Product> getFilteredProductsByCategory(@PathVariable("categoryID") int categoryID){
+        return productService.getFilteredProducts(categoryID);
+    }
+
 }

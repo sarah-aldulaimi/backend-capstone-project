@@ -5,6 +5,7 @@ import com.capstone.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,5 +36,16 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public List<Product> getFilteredProducts(int categoryID){
+        List<Product> temp = new ArrayList<Product>();
+        List<Product> filteredProducts = new ArrayList<Product>();
+        temp = productRepository.findAll();
+        for (int i = 0; i < temp.size(); i++) {
+            if(temp.get(i).getCategoryID() == categoryID){
+                filteredProducts.add(temp.get(i));
+            }
+        }
 
+        return filteredProducts;
+    }
 }

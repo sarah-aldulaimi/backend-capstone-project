@@ -3,7 +3,6 @@ package com.capstone.ecommerce.controller;
 import com.capstone.ecommerce.model.Orders;
 import com.capstone.ecommerce.model.Product;
 import com.capstone.ecommerce.service.OrderService;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
