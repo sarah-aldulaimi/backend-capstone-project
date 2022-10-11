@@ -26,11 +26,12 @@ public class OrderService {
         return orderRepository.getOrderById(id);
     }
 
-    public void updateOrder(int id, Orders orders) {
+    public Orders updateOrder(int id, Orders orders) {
         if (orderRepository.existsById(id)) {
             orders.setUserID(id);
             orderRepository.save(orders);
         }
+        return orders;
     }
     public void deleteOrderById (int id){
         orderRepository.deleteById(id);

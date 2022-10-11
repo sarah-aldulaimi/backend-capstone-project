@@ -21,7 +21,7 @@ public class EcommerceApplication {
 				registry.addMapping("/users").allowedOrigins("http://localhost:8080").allowedOrigins("http://localhost:4200");
 				registry.addMapping("/login").allowedOrigins("http://localhost:8080").allowedOrigins("http://localhost:4200");
 				registry.addMapping("/orders").allowedOrigins("http://localhost:8080").allowedOrigins("http://localhost:4200");
-
+				registry.addMapping("/products").allowedOrigins("http://localhost:8080").allowedOrigins("http://localhost:4200");
 			}
 		};
 	}

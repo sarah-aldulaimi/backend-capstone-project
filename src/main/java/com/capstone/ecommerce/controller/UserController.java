@@ -49,6 +49,7 @@ public class UserController {
     public Set<Role> checkUserRole(@PathVariable("userID") int userID){
         return userService.checkUserRole(userID);
     }
+
     @PostMapping("users/{userID}/roles")
     public void assignUserRole(@PathVariable("userID") int userID, @RequestBody Role role){
         userService.assignUserRole(userID,role.getId());
