@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping
 public class UserController {
@@ -39,7 +39,6 @@ public class UserController {
     private void updateUser(@PathVariable("userID") int userID, @RequestBody Users users){
         userService.updateUser(userID, users);
     }
-    @CrossOrigin(origins = "https://localhost:8080")
     @PostMapping("/login")
     public Users login(@RequestBody Users users){
         return userService.isLoginSuccessful(users);
