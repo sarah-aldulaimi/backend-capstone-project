@@ -23,7 +23,7 @@ public class ProductController {
     private Product getProductByID(@PathVariable("productID") int productID) {
         return productService.getProductById(productID);
     }
-//    @CrossOrigin(origins = "https://localhost:4200")
+
     @DeleteMapping("/{productID}")
     private void deleteProduct(@PathVariable("productID") int productID) {
         productService.deleteProductById(productID);
@@ -35,8 +35,8 @@ public class ProductController {
     }
 
     @PutMapping("/{productID}")
-    private void updateProduct(@PathVariable("productID") int productID, @RequestBody Product product){
-        productService.updateProduct(productID, product);
+    private Product updateProduct(@PathVariable("productID") int productID, @RequestBody Product product){
+        return productService.updateProduct(productID, product);
     }
 
     @GetMapping("categories/{categoryID}")

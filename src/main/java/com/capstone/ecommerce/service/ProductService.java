@@ -22,11 +22,12 @@ public class ProductService {
         return productRepository.getProductById(id);
     }
 
-        public void updateProduct(int id, Product product) {
+    public Product updateProduct(int id, Product product) {
         if (productRepository.existsById(id)) {
             product.setId(id);
             productRepository.save(product);
         }
+        return product;
     }
     public void deleteProductById (int id){
         productRepository.deleteById(id);

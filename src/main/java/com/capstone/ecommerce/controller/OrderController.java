@@ -46,7 +46,7 @@ public class OrderController {
     }
 
     @DeleteMapping("{orderID}/products/{productID}")
-    private void deleteProductToOrder(@PathVariable("orderID") int orderID, @PathVariable("productID") int productID){
+    private void deleteProductFromOrder(@PathVariable("orderID") int orderID, @PathVariable("productID") int productID){
         orderService.deleteProductFromOrder(orderID, productID);
     }
 

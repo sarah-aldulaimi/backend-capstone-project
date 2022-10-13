@@ -19,9 +19,9 @@ public class Product {
     String description;
     @Column
     float price;
-
     @Column
     int categoryID;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private Set<Orders> orders = new HashSet<>();
