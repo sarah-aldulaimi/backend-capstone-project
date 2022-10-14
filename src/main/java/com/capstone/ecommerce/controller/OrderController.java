@@ -40,9 +40,9 @@ public class OrderController {
         return orderService.updateOrder(orderID, orders);
     }
 
-    @PostMapping("{orderID}/products")
-    private Orders addProductToOrder(@PathVariable("orderID") int orderID, @RequestBody Product product){
-        return orderService.addProductToOrder(product.getId(), orderID);
+    @PostMapping("{orderID}/products/{productCount}")
+    private List<Product> addProductToOrder(@PathVariable("orderID") int orderID,@PathVariable("productCount") int productCount, @RequestBody Product product){
+        return orderService.addProductToOrder(product.getId(), orderID, productCount);
     }
 
     @DeleteMapping("{orderID}/products/{productID}")
@@ -53,5 +53,10 @@ public class OrderController {
     @GetMapping("{orderID}/products")
     private List<Product> viewProductsOfOrder(@PathVariable("orderID") int orderID){
         return orderService.viewProductsOfOrder(orderID);
+    }
+
+    @GetMapping("/users/{userID}")
+    private List<Orders> getAllOrdersForUser(@PathVariable("userID") int userID){
+        return orderService.viewAllOrdersByUser(userID);
     }
 }
