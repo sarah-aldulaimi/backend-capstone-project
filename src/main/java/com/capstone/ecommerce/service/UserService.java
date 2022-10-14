@@ -65,4 +65,12 @@ public class UserService {
         userRepository.save(tempUser);
         return tempUser;
     }
+
+    public Users deleteUserRole(int userID, int roleID){
+        Users tempUser = userRepository.getUserById(userID);
+        Role tempRole = roleRepository.getRoleById(roleID);
+        tempUser.getRoles().remove(tempRole);
+        userRepository.save(tempUser);
+        return tempUser;
+    }
 }

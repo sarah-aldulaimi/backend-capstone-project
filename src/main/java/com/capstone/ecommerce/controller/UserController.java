@@ -53,4 +53,9 @@ public class UserController {
     public void assignUserRole(@PathVariable("userID") int userID, @RequestBody Role role){
         userService.assignUserRole(userID,role.getId());
     }
+
+    @DeleteMapping("users/{userID}/roles/{roleID}")
+    public void deleteUserRole(@PathVariable("userID") int userID, @PathVariable("roleID") int roleID){
+        userService.deleteUserRole(userID,roleID);
+    }
 }
