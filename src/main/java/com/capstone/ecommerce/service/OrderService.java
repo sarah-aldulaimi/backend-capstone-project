@@ -56,7 +56,7 @@ public class OrderService {
         Orders order = orderRepository.getOrderById(orderID);
 //        order.setProductCount(order.getProductCount()+1);
         Product product = productRepository.getProductById(productID);
-        float totalPrice = order.getTotalCost() + product.getPrice();
+        float totalPrice = order.getTotalCost() + (product.getPrice() * productCount);
         order.setTotalCost(totalPrice);
         order.getProducts().add(product);
         int newProductCount = order.getProductCount() + productCount;
@@ -65,11 +65,11 @@ public class OrderService {
         return order.getProducts();
     }
 
-    public void deleteProductFromOrder(int orderID, int productID){
+    public void deleteProductFromOrder(int orderID, int productID, int productCount){
         Orders order = orderRepository.getOrderById(orderID);
         Product product = productRepository.getProductById(productID);
 //        order.setProductCount(order.getProductCount()-1);
-        float totalPrice = order.getTotalCost() - product.getPrice();
+        float totalPrice = order.getTotalCost() - (product.getPrice()*productCount);
         order.setTotalCost(totalPrice);
         order.getProducts().remove(product);
         orderRepository.save(order);
