@@ -19,6 +19,8 @@ public class LocationService {
     }
 
     public Location getLocationById(int id) {
+        if(!locationRepository.existsById(id)){
+        }
         return locationRepository.getLocationById(id);
     }
 

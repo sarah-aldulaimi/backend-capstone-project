@@ -1,9 +1,9 @@
 package com.capstone.ecommerce.repository;
 
-import com.capstone.ecommerce.model.Orders;
+import com.capstone.ecommerce.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Orders, Integer> {
-    public Orders getOrderById(Integer id);
+public interface OrderRepository extends JpaRepository<Order, Integer> {
+    public Order getOrderById(Integer id);
 }
 
