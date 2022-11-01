@@ -70,6 +70,12 @@ public class OrderService {
         orderRepository.findById(orderID).orElseThrow(()->{
             throw new NotFoundException("This order cannot be found");
         });
+        productRepository.findById(productID).orElseThrow(()->{
+            throw new NotFoundException("This product cannot be found");
+        });
+        if(productCount <=0){
+            throw new InvalidInputException("The product count cannot be 0 or less!");
+        }
         float totalPrice = orderRepository.getOrderById(orderID).getTotalCost() + (productRepository.getProductById(productID).getPrice() * productCount);
         orderRepository.getOrderById(orderID).setTotalCost(totalPrice);
         orderRepository.getOrderById(orderID).getProducts().add(productRepository.getProductById(productID));
