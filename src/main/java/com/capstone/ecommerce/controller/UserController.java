@@ -34,9 +34,10 @@ public class UserController {
         return new ResponseEntity(id,HttpStatus.OK);
     }
     @PutMapping("/users/{userID}")
-    private ResponseEntity updateUser(@PathVariable("userID") int userID, @RequestBody User user){
+    private ResponseEntity<?> updateUser(@PathVariable("userID") int userID, @RequestBody User user){
         userService.updateUser(userID, user);
-        return new ResponseEntity(userID, HttpStatus.OK);
+        return ResponseEntity.ok().build();
+//        return new ResponseEntity(userID, HttpStatus.OK);
     }
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user) {

@@ -28,10 +28,6 @@ public class GlobalExceptionHandler extends RuntimeException{
         return new ResponseEntity(notFoundException.getMsg(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = DatabaseEmptyException.class)
-    public ResponseEntity noValuesInDatabase(DatabaseEmptyException databaseEmptyException){
-        return new ResponseEntity("There are no values to display", HttpStatus.NOT_FOUND);
-    }
 
     @ExceptionHandler(value = UserDoesNotHaveARoleException.class)
     public ResponseEntity userDoesHaveARoleException(){

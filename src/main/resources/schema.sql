@@ -70,6 +70,7 @@ create table orders(
 create table order_product(
     productID INT NOT NULL,
     orderID INT NOT NULL,
+    productCount INT NOT NULL,
     constraint pk_order_products primary key (productID, orderID),
     constraint fk_orderID_order foreign key (orderID) references orders(ID),
     constraint fk_productID_product foreign key (productID) references product(id)

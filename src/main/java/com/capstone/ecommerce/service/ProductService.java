@@ -1,6 +1,5 @@
 package com.capstone.ecommerce.service;
 import com.capstone.ecommerce.exception.AlreadyExistsException;
-import com.capstone.ecommerce.exception.DatabaseEmptyException;
 import com.capstone.ecommerce.exception.InvalidInputException;
 import com.capstone.ecommerce.exception.NotFoundException;
 import com.capstone.ecommerce.model.Product;

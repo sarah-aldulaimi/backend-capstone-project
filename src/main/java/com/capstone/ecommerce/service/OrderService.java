@@ -76,6 +76,7 @@ public class OrderService {
         if(productCount <=0){
             throw new InvalidInputException("The product count cannot be 0 or less!");
         }
+
         float totalPrice = orderRepository.getOrderById(orderID).getTotalCost() + (productRepository.getProductById(productID).getPrice() * productCount);
         orderRepository.getOrderById(orderID).setTotalCost(totalPrice);
         orderRepository.getOrderById(orderID).getProducts().add(productRepository.getProductById(productID));

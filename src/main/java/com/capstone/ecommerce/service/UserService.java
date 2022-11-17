@@ -69,6 +69,9 @@ public class UserService {
         if(!locationRepository.existsById(user.getLocationId())){
             throw new NotFoundException("This location does not exist");
         }
+        if(user.getEmail().isEmpty() || user.getPassword().isEmpty()  || user.getFirstName().isEmpty() || user.getLastName().isEmpty()){
+            throw new InvalidInputException("You cannot leave this field blank");
+        }
         userRepository.save(user);
         return user.getId();
     }

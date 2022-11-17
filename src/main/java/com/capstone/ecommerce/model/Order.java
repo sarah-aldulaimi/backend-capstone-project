@@ -1,5 +1,4 @@
 package com.capstone.ecommerce.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.*;
-
 @Data
 @Entity
 @Table (name ="orders")
@@ -18,7 +16,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     int id;
-
     @Column
     int userID;
     @Column
