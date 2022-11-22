@@ -99,6 +99,7 @@ public class OrderService {
         orderRepository.getOrderById(orderID).setTotalCost(totalPrice);
         orderRepository.getOrderById(orderID).getProducts().remove(productRepository.getProductById(productID));
         int newProductCount = orderRepository.getOrderById(orderID).getProductCount() - productCount;
+
         orderRepository.getOrderById(orderID).setProductCount(newProductCount);
         orderRepository.save(orderRepository.getOrderById(orderID));
     }

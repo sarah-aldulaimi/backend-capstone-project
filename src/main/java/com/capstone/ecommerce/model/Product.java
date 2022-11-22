@@ -25,9 +25,9 @@ public class Product {
     @Column
     String description;
     @Column
-    float price;
+    Float price;
     @Column
-    int categoryID;
+    Integer categoryID;
 
     @JsonIgnore
     //using this so that application does not send the roles as part of the json object

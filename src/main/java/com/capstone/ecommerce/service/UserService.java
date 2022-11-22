@@ -76,6 +76,12 @@ public class UserService {
         return user.getId();
     }
     public int isLoginSuccessful(User user) {
+        if(user.getEmail().isEmpty()){
+            throw new InvalidInputException("Please insert your email address!");
+        }
+        if(user.getPassword().isEmpty()){
+            throw new InvalidInputException("Please insert your password!");
+        }
         if(userRepository.getUserByEmail(user.getEmail()) == null){
             throw new NotFoundException("This user cannot be found");
         }

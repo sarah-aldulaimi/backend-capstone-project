@@ -6,6 +6,7 @@ import com.capstone.ecommerce.model.Product;
 import com.capstone.ecommerce.repository.CategoryRepository;
 import com.capstone.ecommerce.repository.OrderRepository;
 import com.capstone.ecommerce.repository.ProductRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +38,9 @@ public class ProductService {
         categoryRepository.findById(product.getCategoryID()).orElseThrow(()->{
             throw new NotFoundException("This category cannot be found");
         });
-        //product.setId(id);
+        //delete the old one then create the new one
         productRepository.save(product);
+        productRepository.deleteById(id);
     }
     public void deleteProductById (int id){
         if(!productRepository.existsById(id)){
@@ -53,6 +55,13 @@ public class ProductService {
         productRepository.deleteById(id);
     }
     public void addProduct(Product product){
+        if(product.getCategoryID() == null){
+            throw new InvalidInputException("Category cannot be empty");
+        }
+        if(product.getPrice() == null){
+            throw new InvalidInputException("Price cannot be empty");
+        }
+
         categoryRepository.findById(product.getCategoryID()).orElseThrow(()->{
             throw new NotFoundException("This category cannot be found");
         });
